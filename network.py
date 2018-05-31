@@ -147,3 +147,10 @@ def sigmoid(z):
 def sigmoid_prime(z):
     """Derivative of the sigmoid function."""
     return sigmoid(z)*(1-sigmoid(z))
+
+net = Network([2, 3, 7])
+print(net.weights)
+print(net.biases)
+x = net.feedforward(np.array([[2.7],[2.7]]))
+
+print(x)
