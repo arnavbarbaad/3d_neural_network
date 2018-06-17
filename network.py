@@ -18,7 +18,7 @@ import random
 
 # Third-party libraries
 import numpy as np
-
+import pickle
 class Network(object):
 
     def __init__(self, sizes):
@@ -34,9 +34,15 @@ class Network(object):
         ever used in computing the outputs from later layers."""
         self.num_layers = len(sizes)
         self.sizes = sizes
-        self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
+        self.biases = [np.random.randn(y, 1) for y in sizes[1:]] #Set biases of sizes given in sizes list except the 1st one
         self.weights = [np.random.randn(y, x)
                         for x, y in zip(sizes[:-1], sizes[1:])]
+
+    def save_trained_newtork(self):
+        weights_file = open('weights.pkl','wb')
+        pickle.dump(self.weights, weights_file)
+        biases_file = open('biases.pkl','wb')
+        pickle.dump(self.biases, biases_file)
 
     def feedforward(self, a):
         """Return the output of the network if ``a`` is input."""
@@ -148,9 +154,9 @@ def sigmoid_prime(z):
     """Derivative of the sigmoid function."""
     return sigmoid(z)*(1-sigmoid(z))
 
-net = Network([2, 3, 7])
+net = Network([2, 3z, 1])
 print(net.weights)
 print(net.biases)
-x = net.feedforward(np.array([[2.7],[2.7]]))
-
+x = net.feedforward(np.array([[2],[3]]))
+net.save_trained_newtork()
 print(x)
